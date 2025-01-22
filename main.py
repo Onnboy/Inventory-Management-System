@@ -1,5 +1,5 @@
 from itertools import count
-import database
+import confdatabase
 import questionary
 import sys
 import logging
