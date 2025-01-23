@@ -12,7 +12,7 @@ class DataBase:
         self.cursor = self.conexao.cursor()
     
     def inserir_produto(self, nome, descricao, quantidade, preco):
-        query = """ INSERT INTO Produtos (nome, descricao, Quantidade_disponivel, preco) VALUES (%s, %s, %s, %s)"""
+        query = """ INSERT INTO Produtos (Nome, Descricao, Quantidade_disponivel, Preco) VALUES (%s, %s, %s, %s)"""
         valores = (nome, descricao, quantidade, preco)
         self.cursor.execute(query, valores)
         self.conexao.commit()
@@ -34,9 +34,9 @@ class DataBase:
         return self.cursor.fetchone()
     
     def atualizar_quantidade(self, id_produto, nova_quantidade):
-        query = "UPDATE Produtos SET quantidade = %s WHERE id = %s"
+        query = "UPDATE Produtos SET Quantidade_disponivel = %s WHERE id = %s"
         self.cursor.execute(query, (nova_quantidade, id_produto))
-        self.conn.commit()
+        self.conexao.commit()
 
     def remover_produto(self, produto_id):
         query = "DELETE FROM Produtos WHERE ID = %s"
@@ -45,7 +45,7 @@ class DataBase:
 
     def registrar_venda(self, produto_id, quantidade):
         query = """
-        INSERT INTO Vendas (produto_id, quantidade, data_venda) VALUES (%s, %s, %s)
+        INSERT INTO Vendas (ID_Produto_Vendido, Quantidade_Vendida, Data_Venda) VALUES (%s, %s, %s)
         """
         data_venda = datetime.now().strftime("%Y-%m-%d")
         valores = (produto_id, quantidade, data_venda)
